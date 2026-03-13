@@ -25,9 +25,24 @@ export default function UsersPage() {
         roleId: "customer", // Default role
     });
 
+    const [roles, setRoles] = useState<any[]>([]);
+
     useEffect(() => {
         fetchUsers();
+        fetchRoles();
     }, []);
+
+    const fetchRoles = async () => {
+        try {
+            const { data } = await apiClient.get("/users/roles");
+            setRoles(data);
+            if (data.length > 0) {
+                setFormData(prev => ({ ...prev, roleId: data.find((r: any) => r.name === 'CUSTOMER')?.id || data[0].id }));
+            }
+        } catch (err) {
+            console.error("Failed to fetch roles:", err);
+        }
+    };
 
     const fetchUsers = async () => {
         try {
@@ -50,7 +65,7 @@ export default function UsersPage() {
                 setIsAddModalOpen(false);
                 setSuccessMessage("");
                 fetchUsers();
-                setFormData({ email: "", firstName: "", lastName: "", password: "", roleId: "customer" });
+                setFormData({ email: "", firstName: "", lastName: "", password: "", roleId: roles.find((r: any) => r.name === 'CUSTOMER')?.id || roles[0]?.id });
             }, 1500);
         } catch (err: any) {
             alert(err.response?.data?.message || "Failed to create user");
@@ -262,15 +277,17 @@ export default function UsersPage() {
 
                                 <div className="space-y-1">
                                     <label className="text-xs font-black uppercase tracking-widest text-obliq-secondary ml-1">Assigned Role</label>
-                                    <select
-                                        value={formData.roleId}
-                                        onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
-                                        className="w-full rounded-2xl border border-border bg-gray-50 p-3 text-sm font-bold text-obliq-primary outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none transition-all"
-                                    >
-                                        <option value="manager">Manager</option>
-                                        <option value="agent">Agent</option>
-                                        <option value="customer">Customer</option>
-                                    </select>
+                                        <select
+                                            value={formData.roleId}
+                                            onChange={(e) => setFormData({ ...formData, roleId: e.target.value })}
+                                            className="w-full rounded-2xl border border-border bg-gray-50 p-3 text-sm font-bold text-obliq-primary outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none transition-all"
+                                        >
+                                            {roles.filter(r => r.name !== 'ADMIN').map((role) => (
+                                                <option key={role.id} value={role.id}>
+                                                    {role.name.charAt(0) + role.name.slice(1).toLowerCase()}
+                                                </option>
+                                            ))}
+                                        </select>
                                 </div>
 
                                 <button
