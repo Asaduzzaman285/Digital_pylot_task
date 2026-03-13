@@ -36,13 +36,25 @@ export class UsersController {
 
     @Get(':id')
     @RequirePermission('view:users')
-    findOne(@Param('id') id: string) {
+    async findOne(@Param('id') id: string, @Req() req: any) {
+        if (req.user.role.name !== 'ADMIN') {
+            const user = await this.prisma.user.findUnique({ where: { id }, select: { managerId: true } });
+            if (!user || user.managerId !== req.user.id) {
+                throw new ForbiddenException('Manager scope: you can only view your own team members');
+            }
+        }
         return this.usersService.findOne(id);
     }
 
     @Patch(':id')
     @RequirePermission('edit:users')
-    update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto, @Req() req: any) {
+        if (req.user.role.name !== 'ADMIN') {
+            const user = await this.prisma.user.findUnique({ where: { id }, select: { managerId: true } });
+            if (!user || user.managerId !== req.user.id) {
+                throw new ForbiddenException('Manager scope: you can only edit your own team members');
+            }
+        }
         return this.usersService.update(id, updateUserDto);
     }
 }

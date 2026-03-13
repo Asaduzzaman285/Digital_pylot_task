@@ -22,7 +22,18 @@ export class PermissionsController {
     @Post('grant')
     @RequirePermission('manage:permissions')
     async grant(@Body() dto: GrantPermissionDto, @Req() req: any) {
-        // 1. Grant Ceiling: Can only grant what you have
+        // 1. Manager Scope: Can only grant to your subordinates (unless ADMIN)
+        if (req.user.role.name !== 'ADMIN') {
+            const targetUser = await this.prisma.user.findUnique({
+                where: { id: dto.userId },
+                select: { managerId: true },
+            });
+            if (!targetUser || targetUser.managerId !== req.user.id) {
+                throw new ForbiddenException('Manager scope: you can only grant permissions to your own team');
+            }
+        }
+
+        // 2. Grant Ceiling: Can only grant what you have
         if (!req.user.permissions.includes(dto.permissionAtom)) {
             throw new ForbiddenException(`Grant ceiling: you do not hold permission [${dto.permissionAtom}]`);
         }

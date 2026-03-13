@@ -10,8 +10,21 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { Skeleton } from "@/components/ui/skeleton";
+import { useEffect, useState } from "react";
+
+import { useRequirePermission } from "@/hooks/use-permissions";
+
 export default function DashboardPage() {
+    useRequirePermission("view:dashboard");
     const { user } = useAuthStore();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate data fetching
+        const timer = setTimeout(() => setIsLoading(false), 1500);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className="space-y-8 p-4">
@@ -25,49 +38,76 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <StatCard
-                    title="Total Users"
-                    value="1,280"
-                    icon={Users}
-                    trend="+4.75%"
-                    trendUp={true}
-                />
-                <StatCard
-                    title="Active Leads"
-                    value="452"
-                    icon={ClipboardList}
-                    trend="+10.2%"
-                    trendUp={true}
-                />
-                <StatCard
-                    title="Conversion"
-                    value="12.5%"
-                    icon={TrendingUp}
-                    trend="-1.5%"
-                    trendUp={false}
-                />
-                <StatCard
-                    title="Security Alerts"
-                    value="2"
-                    icon={AlertCircle}
-                    trend="Stable"
-                    trendUp={true}
-                />
+                {isLoading ? (
+                    Array.from({ length: 4 }).map((_, i) => (
+                        <div key={i} className="glass rounded-3xl p-6">
+                            <div className="flex items-center justify-between mb-6">
+                                <Skeleton className="h-4 w-24" />
+                                <Skeleton className="h-10 w-10 rounded-xl" />
+                            </div>
+                            <div className="flex items-baseline justify-between">
+                                <Skeleton className="h-8 w-20" />
+                                <Skeleton className="h-6 w-12 rounded-full" />
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <>
+                        <StatCard
+                            title="Total Users"
+                            value="1,280"
+                            icon={Users}
+                            trend="+4.75%"
+                            trendUp={true}
+                        />
+                        <StatCard
+                            title="Active Leads"
+                            value="452"
+                            icon={ClipboardList}
+                            trend="+10.2%"
+                            trendUp={true}
+                        />
+                        <StatCard
+                            title="Conversion"
+                            value="12.5%"
+                            icon={TrendingUp}
+                            trend="-1.5%"
+                            trendUp={false}
+                        />
+                        <StatCard
+                            title="Security Alerts"
+                            value="2"
+                            icon={AlertCircle}
+                            trend="Stable"
+                            trendUp={true}
+                        />
+                    </>
+                )}
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div className="glass rounded-3xl p-8 transition-all hover:bg-white/90">
                     <h3 className="text-xl font-bold text-obliq-primary px-2">Recent Activity</h3>
                     <div className="mt-8 space-y-2">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="flex items-center gap-4 rounded-2xl p-4 hover:bg-white/50 transition-colors">
-                                <div className="h-3 w-3 rounded-full bg-primary" />
-                                <span className="flex-1 font-medium text-obliq-primary">
-                                    System Admin granted <code className="bg-primary/10 text-primary px-2 py-0.5 rounded-lg">'manage:users'</code> to team-lead-01
-                                </span>
-                                <span className="text-xs font-bold text-obliq-secondary uppercase tracking-wider">2h ago</span>
-                            </div>
-                        ))}
+                        {isLoading ? (
+                            Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="flex items-center gap-4 p-4">
+                                    <Skeleton className="h-3 w-3 rounded-full" />
+                                    <Skeleton className="h-5 flex-1" />
+                                    <Skeleton className="h-4 w-16" />
+                                </div>
+                            ))
+                        ) : (
+                            [1, 2, 3, 4].map((i) => (
+                                <div key={i} className="flex items-center gap-4 rounded-2xl p-4 hover:bg-white/50 transition-colors">
+                                    <div className="h-3 w-3 rounded-full bg-primary shadow-[0_0_8px_rgba(232,75,28,0.4)]" />
+                                    <span className="flex-1 font-medium text-obliq-primary">
+                                        System Admin granted <code className="bg-primary/10 text-primary px-2 py-0.5 rounded-lg font-bold">'manage:users'</code> to team-lead-01
+                                    </span>
+                                    <span className="text-xs font-black text-obliq-secondary uppercase tracking-wider">2h ago</span>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
 

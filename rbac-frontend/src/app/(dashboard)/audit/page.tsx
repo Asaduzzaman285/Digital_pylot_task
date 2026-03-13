@@ -5,52 +5,31 @@ import apiClient from "@/lib/api";
 import { History, Search, Filter, Shield, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { useRequirePermission } from "@/hooks/use-permissions";
+
 export default function AuditPage() {
+    useRequirePermission("view:audit");
     const [logs, setLogs] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    // ... rest of the code
 
-    useEffect(() => {
-        fetchLogs();
-    }, []);
-
-    const fetchLogs = async () => {
-        try {
-            const { data } = await apiClient.get("/audit");
-            setLogs(data);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    return (
-        <div className="space-y-8 p-4">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-obliq-primary">Audit Logs</h1>
-                    <p className="text-obliq-secondary font-medium">Transparent record of critical system actions.</p>
-                </div>
-                <div className="flex items-center gap-3">
-                    <button className="glass flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-bold text-obliq-primary hover:bg-white transition-all">
-                        <Filter className="h-4 w-4" />
-                        Date Range
-                    </button>
-                    <button className="flex items-center gap-2 rounded-2xl bg-obliq-primary px-6 py-3 text-sm font-bold text-white shadow-lg shadow-obliq-primary/20 hover:bg-black transition-all">
-                        Export Report
-                    </button>
-                </div>
-            </div>
-
-            <div className="glass overflow-hidden rounded-[2.5rem] p-6">
-                <div className="space-y-4">
+    // ... inside the list
                     {isLoading ? (
-                        <div className="py-24 text-center">
-                            <div className="flex flex-col items-center gap-4">
-                                <Loader2 className="h-10 w-10 animate-spin text-primary" />
-                                <span className="font-black text-obliq-secondary uppercase tracking-[0.2em]">Syncing Records...</span>
+                        Array.from({ length: 5 }).map((_, i) => (
+                            <div key={i} className="flex items-start gap-5 p-6">
+                                <Skeleton className="h-12 w-12 rounded-2xl" />
+                                <div className="flex-1 space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <Skeleton className="h-5 w-40" />
+                                        <Skeleton className="h-4 w-32 rounded-full" />
+                                    </div>
+                                    <Skeleton className="h-4 w-full max-w-md" />
+                                    <Skeleton className="h-20 w-full rounded-2xl" />
+                                </div>
                             </div>
-                        </div>
+                        ))
                     ) : logs.length === 0 ? (
                         <div className="py-24 text-center flex flex-col items-center gap-4">
                             <div className="h-16 w-16 rounded-full bg-gray-50 flex items-center justify-center border border-dashed border-gray-200">
