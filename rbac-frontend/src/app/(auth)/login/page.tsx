@@ -21,7 +21,8 @@ export default function LoginPage() {
 
         try {
             const { data } = await apiClient.post("/auth/login", { email, password });
-            setAuth(data.user, data.accessToken);
+            // The backend now returns { user: { ..., permissions: [] }, accessToken }
+            setAuth(data.user, data.accessToken, data.user.permissions || []);
             router.push("/dashboard");
         } catch (err: any) {
             setError(err.response?.data?.message || "Login failed. Please check your credentials.");

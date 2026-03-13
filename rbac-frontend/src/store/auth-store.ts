@@ -9,6 +9,7 @@ interface User {
     roleId: string;
     role: { name: string };
     status: string;
+    permissions?: string[];
 }
 
 interface AuthState {
@@ -16,7 +17,7 @@ interface AuthState {
     permissions: string[];
     isAuthenticated: boolean;
     isLoading: boolean;
-    setAuth: (user: User, permissions: string[]) => void;
+    setAuth: (user: User, accessToken: string, permissions: string[]) => void;
     setLoading: (loading: boolean) => void;
     logout: () => void;
 }
@@ -27,8 +28,11 @@ export const useAuthStore = create<AuthState>()(
             user: null,
             permissions: [],
             isAuthenticated: false,
-            isLoading: true, // Start as loading by default
-            setAuth: (user, permissions) => set({ user, permissions, isAuthenticated: true, isLoading: false }),
+            isLoading: true,
+            setAuth: (user, accessToken, permissions) => {
+                localStorage.setItem('accessToken', accessToken);
+                set({ user, permissions, isAuthenticated: true, isLoading: false });
+            },
             setLoading: (loading) => set({ isLoading: loading }),
             logout: () => {
                 localStorage.removeItem('accessToken');

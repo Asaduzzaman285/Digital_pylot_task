@@ -25,7 +25,8 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
                 }
 
                 const { data } = await apiClient.get("/auth/me");
-                setAuth(data, data.permissions);
+                // data is the user object from getProfile which includes permissions
+                setAuth(data, token, data.permissions || []);
             } catch (err) {
                 console.error("Auth check failed:", err);
                 setLoading(false);

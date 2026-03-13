@@ -45,10 +45,17 @@ export class AuthService {
         });
 
         const { password: _, ...userWithoutPassword } = user;
+
+        // Resolve permissions for login response
+        const userWithPerms = await this.getProfile(user.id);
+
         return {
             accessToken: tokens.accessToken,
             refreshToken: tokens.refreshToken,
-            user: userWithoutPassword,
+            user: {
+                ...userWithoutPassword,
+                permissions: userWithPerms.permissions
+            },
         };
     }
 
