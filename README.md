@@ -86,6 +86,42 @@ node scripts/verify-system.js
 
 ---
 
+## 🌐 Cloud Deployment Guide
+
+### 1. Database: Neon (PostgreSQL)
+1. Sign up at [Neon.tech](https://neon.tech/).
+2. Create a new project named `obliq-rbac`.
+3. Copy the **Connection String** (Pooled is recommended for serverless: `postgres://user:pass@ep-ghost-123.pooler.aws.neon.tech/neondb?sslmode=require`).
+4. In your backend `.env`, update `DATABASE_URL` with this string.
+
+### 2. Backend Deployment (Render or Railway)
+While Vercel *can* host NestJS via serverless functions, it is often more stable to use **Render** or **Railway** for a long-running NestJS API.
+
+**Option A: Render (Recommended for NestJS)**
+1. Connect your GitHub repo to [Render](https://render.com/).
+2. Select **Web Service**.
+3. Use Build Command: `npm install && npm run build`.
+4. Use Start Command: `npm run start:prod`.
+5. Add secret environment variables (`DATABASE_URL`, `JWT_SECRET`, etc.).
+
+### 3. Frontend Deployment (Vercel)
+1. Connect your GitHub repo to [Vercel](https://vercel.com/).
+2. Set the **Root Directory** to `rbac-frontend`.
+3. **Environment Variables**:
+   - `NEXT_PUBLIC_API_URL`: Your deployed Backend URL (e.g., `https://rbac-api.onrender.com/api/v1`).
+4. Deploy!
+
+### ⚙️ Environment Variables Checklist
+| Variable | Scope | Description |
+| :--- | :--- | :--- |
+| `DATABASE_URL` | Backend | Connection string from Neon. |
+| `JWT_ACCESS_SECRET` | Backend | Long random string. |
+| `JWT_REFRESH_SECRET` | Backend | Another random string. |
+| `FRONTEND_URL` | Backend | Your deployed Vercel URL (e.g., `https://obliq-rbac.vercel.app`). |
+| `NEXT_PUBLIC_API_URL` | Frontend | Your deployed Backend URL + `/api/v1`. |
+
+---
+
 ## 🛡️ Next Steps for Scaling
 - [ ] **MFA Integration**: Add TOTP or SMS verification for Admin roles.
 - [ ] **Sessional Audit**: Live websocket streaming for real-time audit monitoring.
