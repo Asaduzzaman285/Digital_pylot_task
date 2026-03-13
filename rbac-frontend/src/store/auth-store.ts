@@ -15,7 +15,9 @@ interface AuthState {
     user: User | null;
     permissions: string[];
     isAuthenticated: boolean;
+    isLoading: boolean;
     setAuth: (user: User, permissions: string[]) => void;
+    setLoading: (loading: boolean) => void;
     logout: () => void;
 }
 
@@ -25,10 +27,12 @@ export const useAuthStore = create<AuthState>()(
             user: null,
             permissions: [],
             isAuthenticated: false,
-            setAuth: (user, permissions) => set({ user, permissions, isAuthenticated: true }),
+            isLoading: true, // Start as loading by default
+            setAuth: (user, permissions) => set({ user, permissions, isAuthenticated: true, isLoading: false }),
+            setLoading: (loading) => set({ isLoading: loading }),
             logout: () => {
                 localStorage.removeItem('accessToken');
-                set({ user: null, permissions: [], isAuthenticated: false });
+                set({ user: null, permissions: [], isAuthenticated: false, isLoading: false });
             },
         }),
         {
