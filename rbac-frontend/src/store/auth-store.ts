@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface User {
     id: string;
@@ -22,26 +21,23 @@ interface AuthState {
     logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>()(
-    persist(
-        (set) => ({
-            user: null,
-            permissions: [],
-            isAuthenticated: false,
-            isLoading: true,
-            setAuth: (user, accessToken, permissions) => {
-                localStorage.setItem('accessToken', accessToken);
-                set({ user, permissions, isAuthenticated: true, isLoading: false });
-            },
-            setLoading: (loading) => set({ isLoading: loading }),
-            logout: () => {
-                localStorage.removeItem('accessToken');
-                set({ user: null, permissions: [], isAuthenticated: false, isLoading: false });
-            },
-        }),
-        {
-            name: 'auth-storage',
-            storage: createJSONStorage(() => localStorage),
-        },
-    ),
-);
+// Memory-only store for reliability with Next.js 14 SSR/Hydration
+export const useAuthStore = create<AuthState>((set) => ({
+    user: null,
+    permissions: [],
+    isAuthenticated: false,
+    isLoading: true, // AuthProvider will set this to false after checking /auth/me
+    setAuth: (user, accessToken, permissions) => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('accessToken', accessToken);
+        }
+        set({ user, permissions, isAuthenticated: true, isLoading: false });
+    },
+    setLoading: (loading) => set({ isLoading: loading }),
+    logout: () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('accessToken');
+        }
+        set({ user: null, permissions: [], isAuthenticated: false, isLoading: false });
+    },
+}));
