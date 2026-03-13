@@ -52,8 +52,6 @@ const config: Config = {
           border: 'var(--sidebar-border)',
           ring: 'var(--sidebar-ring)',
         },
-        'obliq-primary': '#FF6B35',
-        'obliq-secondary': '#F7C59F',
       },
       borderRadius: {
         lg: 'var(--radius)',
