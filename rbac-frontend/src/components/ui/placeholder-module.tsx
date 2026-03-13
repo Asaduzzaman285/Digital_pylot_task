@@ -1,14 +1,24 @@
-export default function PlaceholderPage({ title }: { title: string }) {
+"use client";
+
+import { Box, Lock } from "lucide-react";
+
+export default function PlaceholderModule({ title }: { title: string }) {
     return (
-        <div className="flex min-h-[50vh] flex-col items-center justify-center space-y-4 rounded-2xl border-2 border-dashed border-gray-200 bg-white p-12 text-center">
-            <div className="rounded-full bg-obliq-surface p-4 text-obliq-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
+        <div className="flex flex-col items-center justify-center py-24 glass rounded-[2.5rem] border border-white/40 shadow-xl bg-white/40 backdrop-blur-sm">
+            <div className="relative mb-8">
+                <div className="h-20 w-20 rounded-[1.5rem] bg-primary/10 flex items-center justify-center border border-primary/20">
+                    <Box className="h-10 w-10 text-primary" />
+                </div>
+                <div className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-white shadow-lg flex items-center justify-center border border-black/5">
+                    <Lock className="h-4 w-4 text-obliq-secondary" />
+                </div>
             </div>
-            <div>
-                <h2 className="text-xl font-bold text-obliq-primary">{title} Module</h2>
-                <p className="text-obliq-secondary max-w-xs mx-auto"> This module is currently under development as part of the Phase 7 integration. </p>
+            
+            <h2 className="text-2xl font-black text-obliq-primary italic uppercase tracking-tighter mb-2">{title}</h2>
+            <p className="text-obliq-secondary font-bold text-xs tracking-widest uppercase opacity-40">Secure Environment Initialized</p>
+            
+            <div className="mt-8 px-6 py-2 rounded-full bg-primary/5 border border-primary/10">
+                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Synchronization in progress</span>
             </div>
         </div>
     );
