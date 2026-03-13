@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  firstName       String
+  lastName        String
+  roleId          String
+  role            Role      @relation(fields: [roleId], references: [id])
+  managerId       String?   // null = top-level (Admin), or their assigned Manager
+  manager         User?     @relation("UserManager", fields: [managerId], references: [id])
+  subordinates    User[]    @relation("UserManager")
+  status          UserStatus @default(ACTIVE)
+  userPermissions UserPermission[]
+  auditLogs       AuditLog[]
+  refreshTokens   RefreshToken[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Role {
+  id              String    @id @default(cuid())
+  name            RoleName  @unique
+  users           User[]
+  rolePermissions RolePermission[]
+}
+
+model Permission {
+  id              String    @id @default(cuid())
+  atom            String    @unique   // e.g. "view:dashboard", "manage:users", "view:reports"
+  label           String             // Human-readable: "View Dashboard"
+  description     String?
+  module          String             // e.g. "Dashboard", "Users", "Reports"
+  rolePermissions RolePermission[]
+  userPermissions UserPermission[]
+}
+
+model RolePermission {
+  id            String     @id @default(cuid())
+  roleId        String
+  role          Role       @relation(fields: [roleId], references: [id])
+  permissionId  String
+  permission    Permission @relation(fields: [permissionId], references: [id])
+  @@unique([roleId, permissionId])
+}
+
+model UserPermission {
+  id            String     @id @default(cuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permissionId  String
+  permission    Permission @relation(fields: [permissionId], references: [id])
+  grantedById   String     // Who granted this permission
+  grantedAt     DateTime   @default(now())
+  @@unique([userId, permissionId])
+}
+
+model RefreshToken {
+  id          String   @id @default(cuid())
+  token       String   @unique
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime
+  isRevoked   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorId     String
+  actor       User     @relation(fields: [actorId], references: [id])
+  action      String   // e.g. "GRANT_PERMISSION", "SUSPEND_USER", "LOGIN"
+  targetType  String?  // e.g. "User", "Permission"
+  targetId    String?
+  metadata    Json?    // Extra context (before/after state, etc.)
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+}
+
+enum RoleName {
+  ADMIN
+  MANAGER
+  AGENT
+  CUSTOMER
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
