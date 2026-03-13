@@ -1,0 +1,351 @@
+﻿node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (: 
+   String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandErr 
+   or
+ 
+Rebuilding...
+CssSyntaxError: tailwindcss: E:\digitalpylot\rb
+ac-frontend\src\app\globals.css:1:1: The 
+`outline-ring/50` class does not exist. If 
+`outline-ring/50` is a custom class, make sure 
+it is defined within a `@layer` directive.
+    at Input.error (E:\digitalpylot\rbac-fronte
+nd\node_modules\postcss\lib\input.js:135:16)
+    at AtRule.error (E:\digitalpylot\rbac-front
+end\node_modules\postcss\lib\node.js:146:32)
+    at processApply (E:\digitalpylot\rbac-front
+end\node_modules\tailwindcss\lib\lib\expandAppl
+yAtRules.js:380:29)
+    at E:\digitalpylot\rbac-frontend\node_modul
+es\tailwindcss\lib\lib\expandApplyAtRules.js:55
+1:9
+    at E:\digitalpylot\rbac-frontend\node_modul
+es\tailwindcss\lib\processTailwindFeatures.js:5
+5:50
+    at async Object.Once (E:\digitalpylot\rbac-
+frontend\node_modules\tailwindcss\lib\cli\build
+\plugin.js:248:17)
+    at async LazyResult.runAsync (E:\digitalpyl
+ot\rbac-frontend\node_modules\postcss\lib\lazy-
+result.js:293:11)
+    at async build (E:\digitalpylot\rbac-fronte
+nd\node_modules\tailwindcss\lib\cli\build\index
+.js:49:9) {
+  reason: 'The `outline-ring/50` class does 
+not exist. If `outline-ring/50` is a custom 
+class, make sure it is defined within a 
+`@layer` directive.',
+  file: 'E:\\digitalpylot\\rbac-frontend\\src\\
+app\\globals.css',
+  source: '@tailwind base;\n' +
+    '@tailwind components;\n' +
+    '@tailwind utilities;\n' +
+    '\n' +
+    ':root {\n' +
+    '  --background: oklch(0.98 0.02 60);\n' +
+    '  --foreground: oklch(0.145 0 0);\n' +
+    '  --card: rgba(255, 255, 255, 0.7);\n' +
+    '  --card-foreground: oklch(0.145 0 0);\n' 
++
+    '  --popover: oklch(1 0 0);\n' +
+    '  --popover-foreground: oklch(0.145 0 
+0);\n' +
+    '  --primary: #FF6B35;\n' +
+    '  --primary-foreground: oklch(0.985 0 
+0);\n' +
+    '  --secondary: #F7C59F;\n' +
+    '  --secondary-foreground: oklch(0.205 0 
+0);\n' +
+    '  --muted: oklch(0.97 0 0);\n' +
+    '  --muted-foreground: oklch(0.556 0 
+0);\n' +
+    '  --accent: #FF9F1C;\n' +
+    '  --accent-foreground: oklch(0.205 0 
+0);\n' +
+    '  --destructive: oklch(0.577 0.245 
+27.325);\n' +
+    '  --destructive-foreground: oklch(0.577 
+0.245 27.325);\n' +
+    '  --border: rgba(255, 107, 53, 0.1);\n' +
+    '  --input: oklch(0.922 0 0);\n' +
+    '  --ring: #FF6B35;\n' +
+    '  --radius: 1rem;\n' +
+    '  --sidebar: rgba(254, 243, 199, 0.5);\n' 
++
+    '  /* Peach tint */\n' +
+    '  --sidebar-foreground: oklch(0.145 0 
+0);\n' +
+    '  --sidebar-primary: #FF6B35;\n' +
+    '  --sidebar-primary-foreground: 
+oklch(0.985 0 0);\n' +
+    '  --sidebar-accent: rgba(255, 107, 53, 
+0.1);\n' +
+    '  --sidebar-accent-foreground: 
+#FF6B35;\n' +
+    '  --sidebar-border: rgba(255, 107, 53, 
+0.1);\n' +
+    '  --sidebar-ring: #FF6B35;\n' +
+    '}\n' +
+    '\n' +
+    '.dark {\n' +
+    '  --background: oklch(0.145 0 0);\n' +
+    '  --foreground: oklch(0.985 0 0);\n' +
+    '  --card: oklch(0.145 0 0);\n' +
+    '  --card-foreground: oklch(0.985 0 0);\n' 
++
+    '  --popover: oklch(0.145 0 0);\n' +
+    '  --popover-foreground: oklch(0.985 0 
+0);\n' +
+    '  --primary: #FF6B35;\n' +
+    '  --primary-foreground: oklch(0.205 0 
+0);\n' +
+    '  --secondary: oklch(0.269 0 0);\n' +
+    '  --secondary-foreground: oklch(0.985 0 
+0);\n' +
+    '  --muted: oklch(0.269 0 0);\n' +
+    '  --muted-foreground: oklch(0.708 0 
+0);\n' +
+    '  --accent: oklch(0.269 0 0);\n' +
+    '  --accent-foreground: oklch(0.985 0 
+0);\n' +
+    '  --destructive: oklch(0.396 0.141 
+25.723);\n' +
+    '  --destructive-foreground: oklch(0.637 
+0.237 25.331);\n' +
+    '  --border: oklch(0.269 0 0);\n' +
+    '  --input: oklch(0.269 0 0);\n' +
+    '  --ring: oklch(0.439 0 0);\n' +
+    '  --sidebar: oklch(0.205 0 0);\n' +
+    '  --sidebar-foreground: oklch(0.985 0 
+0);\n' +
+    '  --sidebar-primary: #FF6B35;\n' +
+    '  --sidebar-primary-foreground: 
+oklch(0.985 0 0);\n' +
+    '  --sidebar-accent: oklch(0.269 0 0);\n' +
+    '  --sidebar-accent-foreground: 
+oklch(0.985 0 0);\n' +
+    '  --sidebar-border: oklch(0.269 0 0);\n' +
+    '  --sidebar-ring: oklch(0.439 0 0);\n' +
+    '}\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    '@layer base {\n' +
+    '  * {\n' +
+    '    @apply border-border 
+outline-ring/50;\n' +
+    '  }\n' +
+    '\n' +
+    '  body {\n' +
+    '    @apply bg-background text-foreground 
+font-sans antialiased;\n' +
+    '  }\n' +
+    '}\n' +
+    '\n' +
+    '@layer utilities {\n' +
+    '  .glass {\n' +
+    '    @apply bg-white/70 backdrop-blur-md 
+border border-white/20 shadow-xl;\n' +
+    '  }\n' +
+    '\n' +
+    '  .bg-wavy {\n' +
+    '    background: linear-gradient(135deg, 
+#FF6B35 0%, #FF9F1C 50%, #F7C59F 100%);\n' +
+    '    position: relative;\n' +
+    '    overflow: hidden;\n' +
+    '  }\n' +
+    '\n' +
+    '  .bg-wavy::before {\n' +
+    '    content: "";\n' +
+    '    position: absolute;\n' +
+    '    top: 0;\n' +
+    '    left: 0;\n' +
+    '    right: 0;\n' +
+    '    bottom: 0;\n' +
+    `    background: 
+url("data:image/svg+xml,%3Csvg 
+xmlns='http://www.w3.org/2000/svg' viewBox='0 
+0 1440 320'%3E%3Cpath fill='%23ffffff' 
+fill-opacity='0.1' d='M0,160L48,176C96,192,192,
+224,288,213.3C384,203,480,149,576,149.3C672,149
+,768,203,864,224C960,245,1056,235,1152,202.7C12
+48,171,1344,117,1392,90.7L1440,64L1440,320L1392
+,320C1344,320,1248,320,1152,320C1056,320,960,32
+0,864,320C768,320,672,320,576,320C480,320,384,3
+20,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/
+path%3E%3C/svg%3E");\n` +
+    '    background-size: cover;\n' +
+    '    background-repeat: no-repeat;\n' +
+    '    pointer-events: none;\n' +
+    '  }\n' +
+    '}',
+  line: 1,
+  column: 1,
+  endLine: 1,
+  endColumn: 16,
+  input: {
+    column: 1,
+    endColumn: 16,
+    endLine: 1,
+    endOffset: 15,
+    line: 1,
+    offset: 0,
+    source: '@tailwind base;\n' +
+      '@tailwind components;\n' +
+      '@tailwind utilities;\n' +
+      '\n' +
+      ':root {\n' +
+      '  --background: oklch(0.98 0.02 60);\n' 
++
+      '  --foreground: oklch(0.145 0 0);\n' +
+      '  --card: rgba(255, 255, 255, 0.7);\n' +
+      '  --card-foreground: oklch(0.145 0 
+0);\n' +
+      '  --popover: oklch(1 0 0);\n' +
+      '  --popover-foreground: oklch(0.145 0 
+0);\n' +
+      '  --primary: #FF6B35;\n' +
+      '  --primary-foreground: oklch(0.985 0 
+0);\n' +
+      '  --secondary: #F7C59F;\n' +
+      '  --secondary-foreground: oklch(0.205 0 
+0);\n' +
+      '  --muted: oklch(0.97 0 0);\n' +
+      '  --muted-foreground: oklch(0.556 0 
+0);\n' +
+      '  --accent: #FF9F1C;\n' +
+      '  --accent-foreground: oklch(0.205 0 
+0);\n' +
+      '  --destructive: oklch(0.577 0.245 
+27.325);\n' +
+      '  --destructive-foreground: oklch(0.577 
+0.245 27.325);\n' +
+      '  --border: rgba(255, 107, 53, 0.1);\n' 
++
+      '  --input: oklch(0.922 0 0);\n' +
+      '  --ring: #FF6B35;\n' +
+      '  --radius: 1rem;\n' +
+      '  --sidebar: rgba(254, 243, 199, 
+0.5);\n' +
+      '  /* Peach tint */\n' +
+      '  --sidebar-foreground: oklch(0.145 0 
+0);\n' +
+      '  --sidebar-primary: #FF6B35;\n' +
+      '  --sidebar-primary-foreground: 
+oklch(0.985 0 0);\n' +
+      '  --sidebar-accent: rgba(255, 107, 53, 
+0.1);\n' +
+      '  --sidebar-accent-foreground: 
+#FF6B35;\n' +
+      '  --sidebar-border: rgba(255, 107, 53, 
+0.1);\n' +
+      '  --sidebar-ring: #FF6B35;\n' +
+      '}\n' +
+      '\n' +
+      '.dark {\n' +
+      '  --background: oklch(0.145 0 0);\n' +
+      '  --foreground: oklch(0.985 0 0);\n' +
+      '  --card: oklch(0.145 0 0);\n' +
+      '  --card-foreground: oklch(0.985 0 
+0);\n' +
+      '  --popover: oklch(0.145 0 0);\n' +
+      '  --popover-foreground: oklch(0.985 0 
+0);\n' +
+      '  --primary: #FF6B35;\n' +
+      '  --primary-foreground: oklch(0.205 0 
+0);\n' +
+      '  --secondary: oklch(0.269 0 0);\n' +
+      '  --secondary-foreground: oklch(0.985 0 
+0);\n' +
+      '  --muted: oklch(0.269 0 0);\n' +
+      '  --muted-foreground: oklch(0.708 0 
+0);\n' +
+      '  --accent: oklch(0.269 0 0);\n' +
+      '  --accent-foreground: oklch(0.985 0 
+0);\n' +
+      '  --destructive: oklch(0.396 0.141 
+25.723);\n' +
+      '  --destructive-foreground: oklch(0.637 
+0.237 25.331);\n' +
+      '  --border: oklch(0.269 0 0);\n' +
+      '  --input: oklch(0.269 0 0);\n' +
+      '  --ring: oklch(0.439 0 0);\n' +
+      '  --sidebar: oklch(0.205 0 0);\n' +
+      '  --sidebar-foreground: oklch(0.985 0 
+0);\n' +
+      '  --sidebar-primary: #FF6B35;\n' +
+      '  --sidebar-primary-foreground: 
+oklch(0.985 0 0);\n' +
+      '  --sidebar-accent: oklch(0.269 0 
+0);\n' +
+      '  --sidebar-accent-foreground: 
+oklch(0.985 0 0);\n' +
+      '  --sidebar-border: oklch(0.269 0 
+0);\n' +
+      '  --sidebar-ring: oklch(0.439 0 0);\n' +
+      '}\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '@layer base {\n' +
+      '  * {\n' +
+      '    @apply border-border 
+outline-ring/50;\n' +
+      '  }\n' +
+      '\n' +
+      '  body {\n' +
+      '    @apply bg-background 
+text-foreground font-sans antialiased;\n' +
+      '  }\n' +
+      '}\n' +
+      '\n' +
+      '@layer utilities {\n' +
+      '  .glass {\n' +
+      '    @apply bg-white/70 backdrop-blur-md 
+border border-white/20 shadow-xl;\n' +
+      '  }\n' +
+      '\n' +
+      '  .bg-wavy {\n' +
+      '    background: linear-gradient(135deg, 
+#FF6B35 0%, #FF9F1C 50%, #F7C59F 100%);\n' +
+      '    position: relative;\n' +
+      '    overflow: hidden;\n' +
+      '  }\n' +
+      '\n' +
+      '  .bg-wavy::before {\n' +
+      '    content: "";\n' +
+      '    position: absolute;\n' +
+      '    top: 0;\n' +
+      '    left: 0;\n' +
+      '    right: 0;\n' +
+      '    bottom: 0;\n' +
+      `    background: 
+url("data:image/svg+xml,%3Csvg 
+xmlns='http://www.w3.org/2000/svg' viewBox='0 
+0 1440 320'%3E%3Cpath fill='%23ffffff' 
+fill-opacity='0.1' d='M0,160L48,176C96,192,192,
+224,288,213.3C384,203,480,149,576,149.3C672,149
+,768,203,864,224C960,245,1056,235,1152,202.7C12
+48,171,1344,117,1392,90.7L1440,64L1440,320L1392
+,320C1344,320,1248,320,1152,320C1056,320,960,32
+0,864,320C768,320,672,320,576,320C480,320,384,3
+20,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/
+path%3E%3C/svg%3E");\n` +
+      '    background-size: cover;\n' +
+      '    background-repeat: no-repeat;\n' +
+      '    pointer-events: none;\n' +
+      '  }\n' +
+      '}',
+    url: 'file:///E:/digitalpylot/rbac-frontend
+/src/app/globals.css',
+    file: 'E:\\digitalpylot\\rbac-frontend\\src
+\\app\\globals.css'
+  },
+  plugin: 'tailwindcss'
+}

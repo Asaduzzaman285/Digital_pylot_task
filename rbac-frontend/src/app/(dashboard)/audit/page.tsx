@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import apiClient from "@/lib/api";
-import { History, Search, Filter, ShieldInfo, Loader2 } from "lucide-react";
+import { History, Search, Filter, Shield, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function AuditPage() {
@@ -62,7 +62,7 @@ export default function AuditPage() {
                         logs.map((log) => (
                             <div key={log.id} className="group relative flex items-start gap-5 rounded-3xl p-6 hover:bg-white/60 transition-all border border-transparent hover:border-white/40">
                                 <div className="z-10 mt-1 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-black/5 group-hover:scale-110 transition-transform">
-                                    <ShieldInfo className={cn(
+                                    <Shield className={cn(
                                         "h-6 w-6",
                                         log.action.includes('GRANT') ? "text-green-500" : "text-blue-500"
                                     )} />

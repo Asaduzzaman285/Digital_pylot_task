@@ -1,0 +1,34 @@
+﻿
+> rbac-frontend@0.1.0 build
+> next build
+
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified:  
+   (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandE 
+   rror
+ 
+> Build error occurred
+Error: Configuring Next.js via 
+'next.config.ts' is not supported. Please 
+replace the file with 'next.config.js' or 
+'next.config.mjs'.
+    at loadConfig (E:\digitalpylot\rbac-front
+end\node_modules\next\dist\server\config.js:7
+87:19)
+    at async Span.traceAsyncFn (E:\digitalpyl
+ot\rbac-frontend\node_modules\next\dist\trace
+\trace.js:154:20)
+    at async E:\digitalpylot\rbac-frontend\no
+de_modules\next\dist\build\index.js:372:28
+    at async Span.traceAsyncFn (E:\digitalpyl
+ot\rbac-frontend\node_modules\next\dist\trace
+\trace.js:154:20)
+    at async build (E:\digitalpylot\rbac-fron
+tend\node_modules\next\dist\build\index.js:36
+6:9)

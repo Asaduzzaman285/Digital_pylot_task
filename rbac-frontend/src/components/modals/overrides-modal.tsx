@@ -43,7 +43,7 @@ export function OverridesModal({ user, onClose, onSuccess }: OverridesModalProps
     const togglePermission = async (atom: string) => {
         const isGranted = userPermissions.includes(atom);
         setIsSubmitting(true);
-        setError("");
+        setErrorMessage("");
 
         try {
             if (isGranted) {
@@ -56,7 +56,7 @@ export function OverridesModal({ user, onClose, onSuccess }: OverridesModalProps
             setStatus("success");
             setTimeout(() => setStatus("idle"), 1500);
         } catch (err: any) {
-            setError(err.response?.data?.message || "Action blocked by grant ceiling or network error.");
+            setErrorMessage(err.response?.data?.message || "Action blocked by grant ceiling or network error.");
             setStatus("error");
         } finally {
             setIsSubmitting(false);
